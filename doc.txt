@@ -29,8 +29,41 @@ docker run --name test -d -p 80:80 nginx (80 http 标准端口 443 securite端�
 docker commit --message "fuck" test nginxv2 改变了原有image 提交并创建新的image ＃ test为最一开始起的container名字 ##！慎用！##
 docker history nginxv2 查看image生成的纪录以dockerfile形式展现
 docker build -t tst3 .  运行dockerfile生成image
-               
 
+#######################################################debian system install something ########################
+docker run -d -p 80:80 -p 443:443 -it debian:buster /bin/bash 建容器并打开可访问端口
+docker exec -it 1e5029a4026d bash 进入debian的bash
+apt-get install nginx 在debian系统里安装nginx
+service nginx start／stop 启动或者关闭nginx
 
+cd etc/nginx/sites-enabled/  删掉default 创建自己的config
+cd /var/www/ 进入工作环境
+apt-get install -y (同意安装)php-fpm php-gd php-mysql php-memcache php-curl 安装php
+/etc/ 所有安装包都在此文件夹下
+/etc/init.d/php7.3-fpm start 开启php
+在工作欢迎中创建test。php
+配置php 	＋ test。php文件 ＋ location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass unix:/run/php/php7.3-fpm.sock;}
+    
+apt install mariadb-server 安装mysql
+service mysql start 进入mysql但是需要用mysql的语言
+mysql -u root < /root/scripts/wordpress_setup.sql 把sql文件内容 写进root账户
+＃＃＃＃文件内容＃＃＃＃
+CREATE DATABASE wordpressdb;
+CREATE USER 'wordpressuser'@'localhost' IDENTIFIED BY 'wordpresspass';
+GRANT ALL PRIVILEGES ON wordpressdb.* TO 'wordpressuser'@'localhost'
+	IDENTIFIED BY 'wordpresspass';
+FLUSH PRIVILEGES;
+
+＃＃＃＃安装wordpress＃＃＃＃
+curl 安装比较好
+curl -O https://wordpress.org/latest.tar.gz
+tar xzvf latest.tar.gz 解压
+cp  cp -r wordpress/ var/www/yy/. 复制所有到工作目录中
+cp wp-config-sample.php wp-config.php 
+vim wp-config.php 更改user等内容
+更改nginx config ＋ index.php
+restart nginx
 
 
