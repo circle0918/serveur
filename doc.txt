@@ -2,6 +2,35 @@
 192.168.99.100
 ➜  ~ curl http://192.168.99.100:32768
 
+docker run -it(进入交互模式) debian:buster /bin/bash (#进入debian bash)
+exit 退出debian bash
+docker ps －a 看正在运行的东西
+docker images 查看所有镜像
+docker rmi ＋镜像名字  删除镜像
+docker container ls -a 查看所有container
+docker login 登陆
+docker search 搜索镜像
+docker pull + 镜像名称 下载image
+docker run --name 改名
+docker run debian /bin/bash -c "while true;do sleep 1;done" ＃c 执行“”号内命令 但要开启另一terminal查看
+docker run --name ＋名字(改container名字)-d debian /bin/bash -c "while true;do sleep 1;done" 可以在此终端查看 返回容器长id 
+                                                               -d 后台运行
+docker stop/kill +id/name 停止容器
+进入容器 docker exec －it ＋id bash   #如果只查看用attach 如果需要启动新进程用exec
+docker start +id 重启container
+       retart +id stop 原先的然后重启
+       pause ／unpause 暂停／恢复 ＋id 不占用cpu
+docker rm -v $(docker ps -aq -f status=exited)  删除所有已停止运行的container
+
+
+##############################创造镜像#####################################################
+
+docker run --name test -d -p 80:80 nginx (80 http 标准端口 443 securite端口) 第一个80为image端口可改变 后一个80固定为网络端口不可改
+docker commit --message "fuck" test nginxv2 改变了原有image 提交并创建新的image ＃ test为最一开始起的container名字 ##！慎用！##
+docker history nginxv2 查看image生成的纪录以dockerfile形式展现
+docker build -t tst3 .  运行dockerfile生成image
+               
+
 
 
 
