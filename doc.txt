@@ -31,7 +31,7 @@ docker history nginxv2 查看image生成的纪录以dockerfile形式展现
 docker build -t tst3 .  运行dockerfile生成image
 
 #######################################################debian system install something ########################
-docker run -d -p 80:80 -p 443:443 -it debian:buster /bin/bash 建容器并打开可访问端口
+docker run -d -p 80:80 -p 443:443 -it debian:buster /bin/bash 建容器并打开可访问端口 docker run --name test0 -d -p 80:80 -p 443:443 -it yy0 /bin/bash
 docker exec -it 1e5029a4026d bash 进入debian的bash
 apt-get install nginx 在debian系统里安装nginx
 service nginx start／stop 启动或者关闭nginx
