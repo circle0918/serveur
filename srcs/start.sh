@@ -1,8 +1,9 @@
 #!/bin/bash
 
 ########## creat a place to work and creat a file php to test nginx
-mkdir /var/www/yy && touch /var/www/yy/index.php
-echo "<?php phpinfo(); ?>" >> /var/www/yy/index.php
+mkdir /var/www/yy 
+#touch /var/www/yy/index.php
+#echo "<?php phpinfo(); ?>" >> /var/www/yy/index.php
 
 ########## telecharge wordpress
 curl -O https://wordpress.org/latest.tar.gz
